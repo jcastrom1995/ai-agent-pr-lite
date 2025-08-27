@@ -18,13 +18,6 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
 
-      - name: Verify action files exist
-        run: |
-          echo "Workspace: $(pwd)"
-          ls -la
-          test -f action.yml && echo "✔ Found action.yml" || (echo "✘ action.yml missing" && exit 1)
-          test -f dist/index.js && echo "✔ Found dist/index.js" || (echo "✘ dist/index.js missing (debes commitearlo)" && exit 1)
-
       - name: Run AI PR Agent Lite (local)
         uses: ./
         with:
