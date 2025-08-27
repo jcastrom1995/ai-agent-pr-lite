@@ -1,0 +1,24 @@
+{
+  "name": "ai-pr-agent-lite",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc && ncc build dist-pre/index.js -o dist --minify",
+    "prebuild": "tsc --outDir dist-pre --module commonjs",
+    "lint": "eslint .",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "eslint": "^9.9.0",
+    "@vercel/ncc": "^0.38.1",
+    "typescript": "^5.4.0"
+  }
+}

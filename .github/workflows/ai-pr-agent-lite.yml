@@ -1,0 +1,25 @@
+name: AI PR Agent Lite
+
+on:
+  pull_request:
+    types: [opened, edited, labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  apply-pr-body:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: Run AI PR Agent Lite
+        uses: <YOUR_ORG>/<YOUR_ACTION_REPO>@v0.1
+        with:
+          git-user-name: "ai-pr-agent-lite"
+          git-user-email: "ai-pr-agent@users.noreply.github.com"
+          commit-message: "chore(ai-pr-agent): apply PR body changes"
