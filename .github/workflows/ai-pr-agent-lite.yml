@@ -1,4 +1,4 @@
-# .github/workflows/ai-pr-agent-lite.yml
+# .github/actions/ai-pr-agent-lite.yml
 name: AI PR Agent Lite
 
 on:
