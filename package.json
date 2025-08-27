@@ -8,7 +8,6 @@
   "scripts": {
     "build": "tsc && ncc build dist-pre/index.js -o dist --minify",
     "prebuild": "tsc --outDir dist-pre --module commonjs",
-    "lint": "eslint .",
     "prepare": "npm run build"
   },
   "dependencies": {
@@ -17,7 +16,6 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
-    "eslint": "^9.9.0",
     "@vercel/ncc": "^0.38.1",
     "typescript": "^5.4.0"
   }
