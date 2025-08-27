@@ -1,9 +1,8 @@
-# .github/actions/ai-pr-agent-lite.yml
 name: AI PR Agent Lite
 
 on:
   pull_request:
-    types: [opened, edited, labeled]
+    types: [opened, edited, synchronize, reopened, labeled]
 
 permissions:
   contents: write
@@ -13,6 +12,19 @@ jobs:
   apply-pr-body:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Verify action files exist
+        run: |
+          echo "Workspace: $(pwd)"
+          ls -la
+          test -f action.yml && echo "✔ Found action.yml" || (echo "✘ action.yml missing" && exit 1)
+          test -f dist/index.js && echo "✔ Found dist/index.js" || (echo "✘ dist/index.js missing (debes commitearlo)" && exit 1)
+
       - name: Run AI PR Agent Lite (local)
         uses: ./
         with:

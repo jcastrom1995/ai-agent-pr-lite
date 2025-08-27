@@ -1,29 +1,27 @@
-name: "AI PR Agent Lite"
-description: "Parses PR body for file/patch blocks, applies changes to the PR branch, and comments results."
-author: "AI PR Agent Lite"
-branding:
-  icon: git-commit
-  color: purple
+# .github/workflows/ai-pr-agent-lite.yml
+name: AI PR Agent Lite
 
-# Required: repositories using this action must grant these perms in their workflow
-# permissions:
-#   contents: write
-#   pull-requests: write
+on:
+  pull_request:
+    types: [opened, edited, labeled]
 
-inputs:
-  git-user-name:
-    description: "Git username for commits"
-    default: "ai-pr-agent-lite"
-    required: false
-  git-user-email:
-    description: "Git email for commits"
-    default: "ai-pr-agent@users.noreply.github.com"
-    required: false
-  commit-message:
-    description: "Commit message when applying changes"
-    default: "chore(ai-pr-agent): apply PR body changes"
-    required: false
+permissions:
+  contents: write
+  pull-requests: write
 
-runs:
-  using: node20
-  main: dist/index.js
+jobs:
+  apply-pr-body:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Run AI PR Agent Lite (local)
+        uses: ./
+        with:
+          git-user-name: "ai-pr-agent-lite"
+          git-user-email: "ai-pr-agent@users.noreply.github.com"
+          commit-message: "chore(ai-pr-agent): apply PR body changes"
