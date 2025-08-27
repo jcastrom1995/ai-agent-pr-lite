@@ -22,6 +22,7 @@ function parseFileBlocks(
 
 function parsePatchBlocks(body: string): string[] {
   const patches: string[] = [];
+  console.log("body", body);
   let m: RegExpExecArray | null;
   while ((m = PATCH_BLOCK_RE.exec(body)) !== null) {
     patches.push(m[1]);
