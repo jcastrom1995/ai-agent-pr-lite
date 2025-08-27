@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run AI PR Agent Lite (local)
-        uses: ./.github/actions/ai-pr-agent-lite
+        uses: ./
         with:
           git-user-name: "ai-pr-agent-lite"
           git-user-email: "ai-pr-agent@users.noreply.github.com"
